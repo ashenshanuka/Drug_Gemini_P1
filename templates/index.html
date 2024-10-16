@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pharmacy Drug Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h3>Gemini</h3>
+    <h1>Drug List</h1>
+    <form method="POST" action="{{ url_for('search') }}">
+        <label for="query">Search:</label>
+        <input type="text" id="query" name="query">
+        <button type="submit">Search</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Expiration Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for drug in drugs %}
+            <tr>
+                <td>{{ drug[0] }}</td>
+                <td>{{ drug[1] }}</td>
+                <td>{{ drug[2] }}</td>
+                <td>{{ drug[3] }}</td>
+                <td>{{ drug[4].strftime('%Y-%m-%d') }}</td>
+                <td>
+                    <a href="{{ url_for('view', id=drug[0]) }}">View</a>
+                    <a href="{{ url_for('edit', id=drug[0]) }}">Edit</a>
+                    <a href="{{ url_for('delete', id=drug[0]) }}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('add') }}">Add New Drug</a>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Drugs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Search Drugs</h1>
+    <form method="POST">
+        <label for="query">Search:</label>
+        <input type="text" id="query" name="query">
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% for drug in drugs %}
+        <li>
+            <a href="{{ url_for('view', id=drug[0]) }}">{{ drug[1] }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
